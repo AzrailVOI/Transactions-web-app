@@ -2,11 +2,16 @@
 *{
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+    font-size: 14pt;
 }
 body{
     margin: 0;
 }
 .title{
     font-weight: 900;
+    padding: .5rem;
     font-size: 15pt;
+    outline: .15rem solid #000;
+    display: flex;
+    place-items: center;
 }

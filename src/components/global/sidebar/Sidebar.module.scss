@@ -4,11 +4,8 @@
   outline: $outline;
   height: 100dvh;
   display: grid;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 1.5fr 16fr;
   &_title{
-    font-weight: 900;
-    padding: .5rem;
-    font-size: 15pt;
     outline: $outline;
   }
 }

@@ -1,8 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {ticketsSlice} from "./tickets/tickets.slice.ts";
+import ticketsSlice from "./tickets/tickets.slice.ts";
+import transactionsSlice from "./transactions/transactions.slice.ts";
 
 const reducers = combineReducers({
-    tickets: ticketsSlice.reducer
+    tickets: ticketsSlice,
+    transactions: transactionsSlice
 })
 export const store = configureStore({
     reducer: reducers,

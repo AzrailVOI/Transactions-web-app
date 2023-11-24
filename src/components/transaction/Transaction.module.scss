@@ -1,0 +1,22 @@
+@import "../../constants/colors.scss";
+.transaction{
+  display:  grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: .1rem solid $black;
+  >div{
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  &[data-fraud="access"]{
+    background: $green_05;
+  }
+  &[data-fraud="fraud"]{
+    background: $red_05;
+  }
+  &[data-fraud="suspicious"]{
+    background: $yellow_05;
+  }
+}
