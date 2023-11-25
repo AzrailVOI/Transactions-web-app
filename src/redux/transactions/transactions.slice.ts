@@ -3,6 +3,7 @@ import {ITransaction} from "../../types/transactions.interface.ts";
 
 const initialState:ITransaction[] = [
     {
+        id: 1,
         fraud: "access",
         customer: "C1093826158",
         age: 2,
@@ -14,6 +15,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 2,
         fraud: "fraud",
         customer: "C1093826158",
         age: 2,
@@ -25,6 +27,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 3,
         fraud: "suspicious",
         customer: "C1093826158",
         age: 2,
@@ -36,6 +39,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 4,
         fraud: "fraud",
         customer: "C1093826152",
         age: 0,
@@ -47,6 +51,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 5,
         fraud: "access",
         customer: "C1093826152",
         age: 0,
@@ -58,6 +63,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 6,
         fraud: "suspicious",
         customer: "C1093826153",
         age: 4,
@@ -69,6 +75,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 7,
         fraud: "fraud",
         customer: "C1093826154",
         age: 3,
@@ -80,6 +87,7 @@ const initialState:ITransaction[] = [
         amount: 4.55
     },
     {
+        id: 8,
         fraud: "suspicious",
         customer: "C1093826151",
         age: 6,
@@ -97,13 +105,16 @@ export const transactionsSlice = createSlice({
     name: "tickets",
     initialState,
     reducers:{
-        // @ts-ignore
-        setTransaction: (state, action: PayloadAction<ITransactions>) => {
-            state = [...state, action.payload]
+        setTransaction: (state, action: PayloadAction<ITransaction>) => {
+            state.push(action.payload);
+        },
+        sortTransaction: (state,action:PayloadAction<ITransaction[]>) => {
+            state.length = 0; // Очистить существующий массив
+            state.push(...action.payload); // Добавить новые элементы
         }
     }
 })
 
-export const { setTransaction } = transactionsSlice.actions
+export const { setTransaction, sortTransaction } = transactionsSlice.actions
 
 export default transactionsSlice.reducer

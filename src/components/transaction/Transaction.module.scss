@@ -1,11 +1,13 @@
 @import "../../constants/colors.scss";
 .transaction{
   display:  grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  grid-template-columns: .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
   border-bottom: .1rem solid $black;
+
   >div{
+    font-weight: 300;
     display: inline-flex;
     justify-content: center;
     align-items: flex-start;

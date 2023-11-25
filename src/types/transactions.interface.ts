@@ -1,13 +1,14 @@
 import {fraud} from "./fraud.type.ts";
 
 export interface ITransaction {
+    id: number
     fraud: fraud,
     customer: string
-    age: number
+    age: string
     sex: 'M' | 'F' | 'E' | 'U'
-    zipcodeOriginal: number
+    zipcodeOriginal: string
     merchant: string
-    zipMerchant: number
+    zipMerchant: string
     category: string
     amount: number
 }
