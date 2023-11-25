@@ -1,12 +1,14 @@
 import styles from "../global/transactions/Transactions.module.scss";
 import {ArrowBigDown, ArrowBigUp, Search} from "lucide-react";
 import Transaction from "../transaction/Transaction.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useTypedSelector} from "../../hooks/useTypedSelector/useTypedSelector.ts";
 import {ITransaction} from "../../types/transactions.interface.ts";
 import {fraud} from "../../types/fraud.type.ts";
 import {useDispatch} from "react-redux";
 import {sortTransaction} from "../../redux/transactions/transactions.slice.ts";
+import {useGetTransaction} from "../../hooks/useGetTransactions/useGetTransaction.ts";
+import {setFilterCategory, setFilterCustomer} from "../../redux/filterParams/filterParams.slice.ts";
 
 interface ITransactionTable {
     filterFraud: fraud[],
@@ -15,6 +17,7 @@ interface ITransactionTable {
 interface ISearch {
   column: keyof ITransaction;
   value: string;
+  check?: boolean;
 }
 
 interface IIsSorted {
@@ -66,7 +69,7 @@ const titles:Array<ITitles> = [
   ]
 
 
-export default function TransactionTable({filterFraud, limit}: ITransactionTable){
+export default function TransactionTable({filterFraud}: ITransactionTable){
 
     const transactions = useTypedSelector((state) => state.transactions);
     const dispatch = useDispatch()
@@ -74,8 +77,17 @@ export default function TransactionTable({filterFraud, limit}: ITransactionTable
     const [searched, setSearched] = useState<ITitles[]>([]);
     const [isSortingColumn, setIsSortingColumn] = useState<IIsSorted>({ column: 'id', order: 'desc' });
 
-    // const [data:transactionsDB, error, isLoading] = useGetTransaction()
+    const filterParams = useTypedSelector((state) => state.filterParams)
 
+    const {data: transactionsDB, isLoading, error, refetch} = useGetTransaction({
+        status: filterParams.status,
+        limit: filterParams.limit,
+        customer: filterParams.customer,
+        category: filterParams.category
+    })
+    useEffect(() => {
+        console.log("TDB",transactionsDB)
+    }, [transactionsDB])
     function searchColumn({ column, value }: ISearch) {
         setSearch((prevSearch) => {
             const existingSearchIndex = prevSearch.findIndex((item) => item.column === column);
@@ -90,6 +102,15 @@ export default function TransactionTable({filterFraud, limit}: ITransactionTable
                 return [...prevSearch, { column, value }];
             }
         });
+        if (column === "category" || column === "customer") {
+            if (column === "category"){
+                dispatch(setFilterCategory(value))
+            }
+            if (column === "customer"){
+                dispatch(setFilterCustomer(value))
+            }
+
+        }
     }
     function sortedByColumn(column: keyof ITransaction) {
         setIsSortingColumn({ column, order: isSortingColumn.order === 'asc' ? 'desc' : 'asc' });
@@ -124,6 +145,7 @@ export default function TransactionTable({filterFraud, limit}: ITransactionTable
     }
     return (
         <>
+            <h1>TDB{transactionsDB?.map((tdb)=><br>{JSON.stringify(tdb)}</br>)}, {isLoading}</h1>
             <div className={styles.transactions_table_title}>
                 {titles.map((title, index) => (
                     <div key={index}>

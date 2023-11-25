@@ -16,8 +16,12 @@ export interface Response {
   category: string;
 }
 class TransactionService {
-    private SERVER_URL = 'http://26.196.35.194/api'
+    private SERVER_URL = 'http://26.196.35.194:5000/api'
     async getTransactions({status, category, customer, limit}:IFilterParams) {
+        if (status==='') status = 'all'
+        if (category==='') category = 'all'
+        if (customer==='') customer = 'all'
+        if (limit===0) limit = 100
         return axios.get<Response[]>(`${this.SERVER_URL}/MySQL`,
             {
                 params:{

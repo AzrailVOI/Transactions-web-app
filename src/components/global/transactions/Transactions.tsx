@@ -4,6 +4,7 @@ import { red } from '@mui/material/colors';
 import { useState } from 'react';
 import { fraud } from '../../../types/fraud.type.ts';
 import TransactionTable from "../../transactionTable/transactionTable.tsx";
+import {useDispatch} from "react-redux";
 
 
 interface ITransactions {}
@@ -11,7 +12,7 @@ interface ITransactions {}
 export default function Transactions({}: ITransactions) {
   const [filterFraud, setFilterFraud] = useState<fraud[]>(['access', 'fraud', 'suspicious']);
   const [limit, setLimit] = useState(100);
-
+    const dispatch = useDispatch()
 
   function filterToggle(fraud: fraud) {
     const updatedFilterFraud = filterFraud.includes(fraud)
@@ -19,6 +20,20 @@ export default function Transactions({}: ITransactions) {
       : [...filterFraud, fraud];
 
     console.log(updatedFilterFraud);
+    updatedFilterFraud.map((item, index) => {
+        let status:string = '';
+        switch (item) {
+            case 'access':
+                status += 'a' + (index!==updatedFilterFraud.length-1 ? ';' : '')
+                break;
+            case 'fraud':
+                status += 'f' + (index!==updatedFilterFraud.length-1 ? ';' : '')
+                break;
+            case 'suspicious':
+                status += 's' + (index!==updatedFilterFraud.length-1 ? ';' : '')
+                break;
+        }
+    })
     setFilterFraud(updatedFilterFraud);
   }
 
