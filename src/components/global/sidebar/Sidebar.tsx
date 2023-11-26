@@ -1,6 +1,5 @@
 import styles from './Sidebar.module.scss';
 import {useTypedSelector} from "../../../hooks/useTypedSelector/useTypedSelector.ts";
-import Transaction from "../../transaction/Transaction.tsx";
 interface ISidebar {}
 
 export default function Sidebar({}: ISidebar){
@@ -14,18 +13,18 @@ export default function Sidebar({}: ISidebar){
                 <div>
                     {
                         transactions.map((transaction) => (
-                            transaction.fraud === 'suspicious' &&
-                            <Transaction
-                                fraud={transaction.fraud}
-                                customer={transaction.customer}
-                                age={transaction.age}
-                                sex={transaction.sex}
-                                zipcodeOriginal={transaction.zipcodeOriginal}
-                                merchant={transaction.merchant}
-                                zipMerchant={transaction.zipMerchant}
-                                category={transaction.category}
-                                amount={transaction.amount}
-                            />
+                            transaction.fraud === 'suspicious' && ''
+                            // <Transaction
+                            //     fraud={transaction.fraud}
+                            //     customer={transaction.customer}
+                            //     age={transaction.age}
+                            //     sex={transaction.sex}
+                            //     zipcodeOriginal={transaction.zipcodeOriginal}
+                            //     merchant={transaction.merchant}
+                            //     zipMerchant={transaction.zipMerchant}
+                            //     category={transaction.category}
+                            //     amount={transaction.amount}
+                            // />
                         ))
                     }
                 </div>
