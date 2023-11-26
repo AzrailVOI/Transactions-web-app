@@ -5,17 +5,13 @@ import Transaction from "../transaction/Transaction.tsx";
 import {useEffect, useState} from "react";
 import {useTypedSelector} from "../../hooks/useTypedSelector/useTypedSelector.ts";
 import {ITransaction} from "../../types/transactions.interface.ts";
-import {fraud} from "../../types/fraud.type.ts";
 import {useDispatch} from "react-redux";
 import {newTransactions, sortTransaction} from "../../redux/transactions/transactions.slice.ts";
 import {useGetTransaction} from "../../hooks/useGetTransactions/useGetTransaction.ts";
 import {setFilterCategory, setFilterCustomer} from "../../redux/filterParams/filterParams.slice.ts";
 import Loader from "../Loader/Loader.tsx";
 
-interface ITransactionTable {
-    filterFraud: fraud[],
-    limit: number
-}
+interface ITransactionTable {}x
 interface ISearch {
   column: keyof ITransaction;
   value: string;
@@ -75,7 +71,7 @@ const titles:Array<ITitles> = [
   ]
 
 
-export default function TransactionTable({filterFraud}: ITransactionTable){
+export default function TransactionTable({}: ITransactionTable){
 
     const transactions = useTypedSelector((state) => state.transactions);
     const dispatch = useDispatch()
@@ -217,7 +213,7 @@ export default function TransactionTable({filterFraud}: ITransactionTable){
             <div className={styles.transactions_table}>
                 {!isLoading?
                     transactions.map((transaction, index) => {
-                    if (filterFraud.includes(transaction.fraud)) {
+                    // if (filterFraud.includes(transaction.fraud)) {
                         if (
                             search.every((searchItem) => {
                                 const columnValue = transaction[searchItem.column];
@@ -244,8 +240,7 @@ export default function TransactionTable({filterFraud}: ITransactionTable){
 
                             );
                         }
-                    }
-                    return null;
+                    // }
                     })
                 : <Loader/>
                 }

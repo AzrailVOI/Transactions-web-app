@@ -7,6 +7,7 @@ import TransactionTable from "../../transactionTable/transactionTable.tsx";
 import {useDispatch} from "react-redux";
 import {setFilterLimit, setFilterOffset, setFilterStatus} from "../../../redux/filterParams/filterParams.slice.ts";
 import {useTypedSelector} from "../../../hooks/useTypedSelector/useTypedSelector.ts";
+import {Link} from "react-router-dom";
 
 
 interface ITransactions {}
@@ -26,13 +27,13 @@ export default function Transactions({}: ITransactions) {
     updatedFilterFraud.map((item, index) => {
         switch (item) {
             case 'access':
-                statusStr += 'a' + (index!==updatedFilterFraud.length-1 ? ';' : '')
+                statusStr += 'a' + (index!==updatedFilterFraud.length-1 ? ':' : '')
                 break;
             case 'fraud':
-                statusStr += 'f' + (index!==updatedFilterFraud.length-1 ? ';' : '')
+                statusStr += 'f' + (index!==updatedFilterFraud.length-1 ? ':' : '')
                 break;
             case 'suspicious':
-                statusStr += 's' + (index!==updatedFilterFraud.length-1 ? ';' : '')
+                statusStr += 's' + (index!==updatedFilterFraud.length-1 ? ':' : '')
                 break;
         }
     })
@@ -50,7 +51,13 @@ export default function Transactions({}: ITransactions) {
     <div className={styles.transactions}>
       <div className={'title ' + styles.transactions_title}>
         <div>Транзакции</div>
-        <div>Vasya generator</div>
+          <Link
+              to={'/add'}
+              className={styles.transactions_to}
+          >
+              {/*<div>Vasya generator</div>*/}
+          </Link>
+
         <div className={styles.transactions_checkboxes}>
             <TextField id="outlined-basic"
                        label="Страница"
