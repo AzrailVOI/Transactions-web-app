@@ -13,6 +13,7 @@
   }
   &_checkboxes{
     display: flex;
+    align-items: center;
   }
   &_table{
     width: 100%;
@@ -20,12 +21,14 @@
 
     &_title{
       display: grid;
-      grid-template-columns: .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: .5fr 1fr 1fr 1fr 1fr 1fr 1.2fr 1fr 1fr 1fr;
       position: relative;
       text-align: center;
       padding: 1rem;
       user-select: none;
+
       > div{
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -51,7 +54,7 @@
         }
         >div{
           cursor: pointer;
-          margin-left: .5rem;
+          font-size: 13pt;
         }
       }
       &::after{

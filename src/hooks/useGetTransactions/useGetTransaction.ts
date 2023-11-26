@@ -4,11 +4,11 @@ import {IFilterParams} from "../../types/IFilterParams.interface.ts";
 import {ITransaction} from "../../types/transactions.interface.ts";
 // import {useTypedSelector} from "../useTypedSelector/useTypedSelector.ts";
 
-export function useGetTransaction({status, limit, customer, category}:IFilterParams) {
+export function useGetTransaction({status, limit, customer, category, offset}:IFilterParams) {
     // const filterParams = useTypedSelector((state) => state.filterParams)
     return useQuery({
-        queryFn: () => TransactionService.getTransactions({status, category, customer, limit}),
-        queryKey: ['transactions', status, limit, customer, category],
+        queryFn: () => TransactionService.getTransactions({status, category, customer, limit, offset}),
+        queryKey: ['transactions', status, limit, customer, category, offset],
         refetchOnWindowFocus: false,
         refetchInterval: 5000,
         refetchIntervalInBackground: true,
@@ -25,7 +25,8 @@ export function useGetTransaction({status, limit, customer, category}:IFilterPar
                     merchant: item.merchant,
                     zipMerchant: item.zipMerchant,
                     category: item.category,
-                    amount: item.amount
+                    amount: item.amount,
+                    sus: item.fraud
                 }
 
             })

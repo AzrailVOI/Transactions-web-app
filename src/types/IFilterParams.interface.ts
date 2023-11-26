@@ -3,4 +3,5 @@ export interface IFilterParams {
     customer: string
     category: string
     limit: number
+    offset: number
 }

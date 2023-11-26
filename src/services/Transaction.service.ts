@@ -1,5 +1,6 @@
 import axios from "axios";
 import {IFilterParams} from "../types/IFilterParams.interface.ts";
+import {ICheckTransaction} from "../types/ICheckTransaction.ts";
 export interface Response {
   id: number;
   step: number;
@@ -15,22 +16,32 @@ export interface Response {
   id1: number;
   category: string;
 }
+
 class TransactionService {
     private SERVER_URL = 'http://26.196.35.194:5000/api'
-    async getTransactions({status, category, customer, limit}:IFilterParams) {
+    async getTransactions({status, category, customer, limit, offset}:IFilterParams) {
         if (status==='') status = 'all'
         if (category==='') category = 'all'
         if (customer==='') customer = 'all'
         if (limit===0) limit = 100
+        if (offset < 0) offset = 0
         return axios.get<Response[]>(`${this.SERVER_URL}/MySQL`,
             {
                 params:{
                     statusFilter:status,
                     categoryFilter:category,
                     customerFilter:customer,
-                    limit:limit
+                    limit:limit,
+                    offset: offset-1
                 }
             })
+    }
+
+    async checkTransaction({id, check}:ICheckTransaction){
+        return axios.post<boolean>(`${this.SERVER_URL}/Checker`,{
+            id: id,
+            check: check
+        })
     }
 }
 export default new TransactionService()

@@ -1,16 +1,16 @@
 @import "../../constants/colors.scss";
 .transaction{
   display:  grid;
-  grid-template-columns: .5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  grid-template-columns: .5fr 1fr 1fr 1fr 1fr 1fr 1.2fr 1fr 1fr 1fr;
   border-bottom: .1rem solid $black;
-
+  text-align: center;
+  padding: .5rem;
   >div{
     font-weight: 300;
     display: inline-flex;
     justify-content: center;
     align-items: flex-start;
+    font-size: 12pt;
   }
   &[data-fraud="access"]{
     background: $green_05;
@@ -21,4 +21,41 @@
   &[data-fraud="suspicious"]{
     background: $yellow_05;
   }
+  &_sus{
+    margin-right: .5rem;
+  }
+  &_check{
+    cursor: pointer;
+    margin-right: .5rem;
+    >svg{
+      scale: 1.1;
+      &:hover{
+        fill: $green_5;
+      }
+
+    }
+
+  }
+  &_percent{
+    &[data-sus='red']{
+      color: $red;
+    }
+    &[data-sus='green']{
+      color: $green;
+    }
+  }
+  &_times{
+    cursor: pointer;
+    margin-left: .5rem;
+    >svg{
+      scale: 1.1;
+      &:hover{
+        fill: $red_05;
+      }
+
+    }
+  }
+}
+.none{
+  display: none !important;
 }

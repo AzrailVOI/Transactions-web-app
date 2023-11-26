@@ -1,5 +1,6 @@
 import {fraud} from "./fraud.type.ts";
 
+
 export interface ITransaction {
     id: number
     fraud: fraud,
@@ -11,4 +12,5 @@ export interface ITransaction {
     zipMerchant: string
     category: string
     amount: number
+    sus: number
 }

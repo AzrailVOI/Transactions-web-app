@@ -1,0 +1,15 @@
+.filter{
+  opacity: 0;
+  transition: all .3s ease-in;
+  &:hover{
+    opacity: 1;
+  }
+}
+.filtered{
+  opacity: 1;
+}
+.none{
+  opacity: 0;
+  user-select: none;
+
+}

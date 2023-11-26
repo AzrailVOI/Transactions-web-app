@@ -5,7 +5,8 @@ const initialState:IFilterParams= {
     status: '',
     customer: '',
     category: '',
-    limit: 100
+    limit: 100,
+    offset: 0
 }
 
 // @ts-ignore
@@ -24,10 +25,17 @@ export const filterParamsSlice = createSlice({
         },
         setFilterLimit: (state,action:PayloadAction<number>) => {
             state.limit = action.payload
+        },
+        setFilterOffset: (state, action:PayloadAction<number>) =>{
+            console.log("AP",action.payload)
+            if (action.payload < 1)
+                state.offset = 1
+            else state.offset = action.payload
+
         }
     }
 })
 
-export const { setFilterStatus, setFilterCustomer, setFilterCategory, setFilterLimit } = filterParamsSlice.actions
+export const { setFilterOffset, setFilterStatus, setFilterCustomer, setFilterCategory, setFilterLimit } = filterParamsSlice.actions
 
 export default filterParamsSlice.reducer
