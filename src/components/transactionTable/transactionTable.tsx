@@ -11,7 +11,7 @@ import {useGetTransaction} from "../../hooks/useGetTransactions/useGetTransactio
 import {setFilterCategory, setFilterCustomer} from "../../redux/filterParams/filterParams.slice.ts";
 import Loader from "../Loader/Loader.tsx";
 
-interface ITransactionTable {}x
+interface ITransactionTable {}
 interface ISearch {
   column: keyof ITransaction;
   value: string;

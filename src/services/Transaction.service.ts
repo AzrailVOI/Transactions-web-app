@@ -24,7 +24,7 @@ class TransactionService {
         if (category==='') category = 'all'
         if (customer==='') customer = 'all'
         if (limit===0) limit = 100
-        if (offset < 0) offset = 0
+        if (offset < 1) offset = 1
         return axios.get<Response[]>(`${this.SERVER_URL}/MySQL`,
             {
                 params:{
